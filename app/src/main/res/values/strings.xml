@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Pokemon App</string>
     <string name="search">Search</string>
+    <string name="id">ID:</string>
+    <string name="name">Name</string>
+    <string name="height">Height</string>
 </resources>
