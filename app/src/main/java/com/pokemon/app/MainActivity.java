@@ -9,9 +9,12 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,9 +34,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ListView pokemon_list_view;
+    private EditText pokemonFilter;
     private RequestQueue myRequest;
     private ArrayList<String> arrayList;
-    ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> adapter;
+    private ArrayAdapter filterAdapter;
 
 
     @Override
@@ -41,14 +46,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize array list and the adapter for pokemon list
         pokemon_list_view = findViewById(R.id.list_view_result);
-
         arrayList = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, arrayList);
-
         pokemon_list_view.setAdapter(adapter);
+
+        // Initialize the pokemon filter with the adapter functionality when text changes
+        pokemonFilter = (EditText) findViewById(R.id.filterText);
+//        filterAdapter = new ArrayAdapter(this, R.layout.activity_main);
+//        pokemon_list_view.setAdapter(filterAdapter);
+
+        pokemonFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                (MainActivity.this).adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // Initialize the Request
         myRequest = Volley.newRequestQueue( this);
 
+        // Calling the method for building the pokemon list when the app loads
         getPokemonList();
 
         // Based on which pokemon is clicked bring the details for the specified pokemon

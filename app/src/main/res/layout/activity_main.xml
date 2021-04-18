@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/filterText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Pokemon Name" />
+
 
     <ListView
         android:id="@+id/list_view_result"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="675dp"
         android:textColor="@android:color/black"
-        android:textSize="50sp" >
-    </ListView>
+        android:textSize="50sp" />
 
-</RelativeLayout>
+</LinearLayout>
